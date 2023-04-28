@@ -21,6 +21,7 @@
     const SKILLS = ["STR", "DEF", "DEX", "RES", "CHA"];
     const RAISESKILLS = false;
     const DIFFICULTYOGROTTE = 1; // 0 = Easy | 1 = Medium | 2 = Hard
+    const SERVERURL = "https://s29-ro.bitefight.gameforge.com";
 
     // Script storage keys
     const KEY_CHARACTER = 'character';
@@ -108,13 +109,19 @@
                         workOptions.value = 8;
                         document.forms[0].submit();
                     }
-                } else goHunting();
+                } else huntDemons();
                 break;
             /*case "/report/fightreport":
                 goToGrotte();
                 break;*/
             case "/city/grotte":
-                huntDemons();
+                CHARACTER.energy > 0 ? huntDemons() : goToWork();
+                break;
+            case "/user/working":
+                var workDuration = timeToMilliseconds($("#graveyardCount span").text());
+                setTimeout(() => {
+                    goToProfile();
+                }, parseInt(workDuration) + 1000);
                 break;
             default:
                 goToGrotte();
@@ -129,23 +136,23 @@
     }
 
     function goToProfile() {
-        location = "https://s29-ro.bitefight.gameforge.com/profile";
+        location = SERVERURL + "/profile";
     }
 
     function goHunting() {
-        location = "https://s29-ro.bitefight.gameforge.com/robbery/index";
+        location = SERVERURL + "/robbery/index";
     }
 
     function goToWork(){
-        location = "https://s29-ro.bitefight.gameforge.com/city/graveyard";
+        location = SERVERURL + "/city/graveyard";
     }
 
     function goToAbilities() {
-        location = "https://s29-ro.bitefight.gameforge.com/profile/index#tabs-2";
+        location = SERVERURL + "/profile/index#tabs-2";
     }
 
     function goToGrotte() {
-        location = "https://s29-ro.bitefight.gameforge.com/city/grotte";
+        location = SERVERURL + "/city/grotte";
     }
 
     function huntDemons() {
@@ -175,6 +182,11 @@
         } else {
             skillsTable.rows[chosenSkill].cells[2].querySelector("div > a").click();
         }
+    }
+
+    function timeToMilliseconds(time) {
+        time = time.split(/:/);
+        return (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
     }
 
     // Update character in local storage

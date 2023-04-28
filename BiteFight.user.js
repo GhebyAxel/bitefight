@@ -2,6 +2,7 @@
 // @name         BiteFight
 // @namespace    https://s29-ro.bitefight.gameforge.com
 // @version      0.1
+// @license      MIT
 // @description  Auto-play for BiteFight game. This script will help hunting, training and working automatically for you. (Only tested for Vampire)
 // @author       GhebyAxel
 // @match        https://s29-ro.bitefight.gameforge.com/*

@@ -109,7 +109,7 @@
                         workOptions.value = 8;
                         document.forms[0].submit();
                     }
-                } else huntDemons();
+                } else goToGrotte();
                 break;
             /*case "/report/fightreport":
                 goToGrotte();

@@ -43,24 +43,26 @@
     });
 
     // Get Stats
-    var allStatsElement = document.getElementsByClassName("gold")[0];
-    var statsValues = allStatsElement.textContent.split("\n");
-    statsValues = statsValues.map(value => value.trim());
-    statsValues.shift();
+    if (location.pathname != "/user/login") {
+        var allStatsElement = document.getElementsByClassName("gold")[0];
+        var statsValues = allStatsElement.textContent.split("\n");
+        statsValues = statsValues.map(value => value.trim());
+        statsValues.shift();
 
-    // Separate and assign values
-    var energy = formatNumber(statsValues[3].substr(0, statsValues[3].indexOf("/") - 1));
-    if (energy) CHARACTER.energy = parseInt(energy);
-    var fragments = formatNumber(statsValues[2]);
-    if (fragments) CHARACTER.fragments = parseInt(fragments);
-    var gold = formatNumber(statsValues[0]);
-    if (gold) CHARACTER.gold = parseInt(gold);
-    var health = formatNumber(statsValues[4].substr(0, statsValues[4].indexOf("/") - 1));
-    if (health) CHARACTER.health = parseInt(health);
-    var hellStones = formatNumber(statsValues[1]);
-    if (hellStones) CHARACTER.hellStones = parseInt(hellStones);
+        // Separate and assign values
+        var energy = formatNumber(statsValues[3].substr(0, statsValues[3].indexOf("/") - 1));
+        if (energy) CHARACTER.energy = parseInt(energy);
+        var fragments = formatNumber(statsValues[2]);
+        if (fragments) CHARACTER.fragments = parseInt(fragments);
+        var gold = formatNumber(statsValues[0]);
+        if (gold) CHARACTER.gold = parseInt(gold);
+        var health = formatNumber(statsValues[4].substr(0, statsValues[4].indexOf("/") - 1));
+        if (health) CHARACTER.health = parseInt(health);
+        var hellStones = formatNumber(statsValues[1]);
+        if (hellStones) CHARACTER.hellStones = parseInt(hellStones);
 
-    updateCharacter();
+        updateCharacter();
+    }
 
     setTimeout(() => {
         switch (location.pathname) {
@@ -122,6 +124,14 @@
                 setTimeout(() => {
                     goToProfile();
                 }, parseInt(workDuration) + 1000);
+                break;
+            case "/user/login":
+                console.log("Start");
+                setTimeout(() => {
+                    document.forms.loginForm.submit();
+                    console.log("function");
+                }, 5000);
+                console.log("end");
                 break;
             default:
                 goToGrotte();

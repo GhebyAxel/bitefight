@@ -123,8 +123,6 @@
                     goToProfile();
                 }, parseInt(workDuration) + 1000);
                 break;
-            case "/user/login":
-                $("#loginForm input.btn-small")[0].click();
             default:
                 goToGrotte();
                 break;
